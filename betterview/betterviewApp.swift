@@ -1,32 +1,54 @@
-//
-//  betterviewApp.swift
-//  betterview
-//
-//  Created by Likhit Grandhi on 28/04/26.
-//
-
 import SwiftUI
-import SwiftData
 
 @main
-struct betterviewApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Item.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+struct BetterViewApp: App {
+    @State private var env = AppEnvironment()
+    @AppStorage(BVPreferenceKey.appearance) private var appearanceRaw = BVAppearance.light.rawValue
 
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
+    init() {
+        BVFont.register()
+    }
+
+    private var preferredScheme: ColorScheme? {
+        BVAppearance(rawValue: appearanceRaw)?.preferred
+    }
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootView()
+                .environment(env)
+                .preferredColorScheme(preferredScheme)
+                .frame(minWidth: 900, minHeight: 560)
         }
-        .modelContainer(sharedModelContainer)
+        .windowStyle(.hiddenTitleBar)
+        .commands {
+            CommandGroup(replacing: .newItem) {
+                Button("New Item") {
+                    Task { @MainActor in
+                        if let id = env.activeWorkspaceID {
+                            await env.newItem(in: id)
+                        }
+                    }
+                }
+                .keyboardShortcut("n", modifiers: .command)
+
+                Button("Open Command Palette") {
+                    Task { @MainActor in
+                        env.commandPaletteOpen = true
+                    }
+                }
+                .keyboardShortcut("k", modifiers: .command)
+
+                Button("Back to List") {
+                    Task { @MainActor in env.backToList() }
+                }
+                .keyboardShortcut(.escape, modifiers: [])
+            }
+        }
+
+        Settings {
+            SettingsView()
+                .preferredColorScheme(preferredScheme)
+        }
     }
 }

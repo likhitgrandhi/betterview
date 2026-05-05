@@ -50,25 +50,25 @@ struct ItemCanvas: View {
         Button {
             commentMode.toggle()
         } label: {
-            HStack(spacing: 4) {
+            HStack(spacing: 5) {
                 Image(systemName: commentMode ? "bubble.left.fill" : "bubble.left")
-                    .font(.system(size: 10))
+                    .font(.system(size: 11))
                 Text(commentMode ? "Commenting" : "Comment")
-                    .font(BVFont.inter(11, weight: commentMode ? .medium : .regular))
+                    .font(BVFont.inter(13, weight: commentMode ? .medium : .regular))
                     .tracking(0.05)
             }
             .foregroundStyle(commentMode ? .white : Color.bvText.opacity(0.85))
-            .padding(.horizontal, 10)
-            .padding(.vertical, 5)
+            .padding(.horizontal, 12)
+            .frame(height: 28)
             .background(
-                RoundedRectangle(cornerRadius: 6)
-                    .fill(commentMode ? Color.bvAccent : Color.bvSurface)
+                RoundedRectangle.bv(BVRadius.pill)
+                    .fill(commentMode ? Color.bvAccent : Color.bvBase)
                     .overlay(
-                        RoundedRectangle(cornerRadius: 6)
+                        RoundedRectangle.bv(BVRadius.pill)
                             .strokeBorder(commentMode ? Color.bvAccent : Color.bvBorder, lineWidth: 1)
                     )
             )
-            .shadow(color: .black.opacity(0.25), radius: 4, y: 1)
+            .shadow(color: .black.opacity(0.04), radius: 6, y: 1)
         }
         .buttonStyle(.plain)
         .keyboardShortcut("c", modifiers: [])

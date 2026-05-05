@@ -39,7 +39,7 @@ struct ArtifactCard: View {
             HStack(spacing: 12) {
                 Image(systemName: "doc.text")
                     .font(.system(size: 13))
-                    .foregroundStyle(Color.bvAccent)
+                    .foregroundStyle(Color.bvText)
                     .frame(width: 16)
                 VStack(alignment: .leading, spacing: 2) {
                     Text(displayTitle)
@@ -73,7 +73,7 @@ struct ArtifactCard: View {
             .padding(.vertical, 12)
             .background(
                 RoundedRectangle.bv(BVRadius.control)
-                    .fill(Color.bvSurface)
+                    .fill(Color.bvBase)
                     .overlay(
                         RoundedRectangle.bv(BVRadius.control)
                             .strokeBorder(

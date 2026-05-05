@@ -64,11 +64,11 @@ struct ComposerView: View {
                         }
                     }
                 )
-                .frame(minHeight: 24, maxHeight: 120)
+                .frame(height: 32)
             }
             .padding(.horizontal, 16)
-            .padding(.top, 10)
-            .padding(.bottom, 2)
+            .padding(.top, 12)
+            .padding(.bottom, 0)
 
             HStack(spacing: 4) {
                 Button {
@@ -149,7 +149,7 @@ struct ComposerView: View {
                 .disabled(!canSend)
             }
             .padding(.horizontal, 8)
-            .padding(.vertical, 6)
+            .padding(.vertical, 4)
         }
         .background(
             RoundedRectangle.bv(BVRadius.sheet)

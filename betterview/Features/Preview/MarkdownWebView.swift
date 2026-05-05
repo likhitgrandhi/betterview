@@ -89,12 +89,13 @@ struct MarkdownWebView: NSViewRepresentable {
         <meta charset="utf-8">
         <style>
           :root {
-            color-scheme: dark;
-            --bg: #171515;
-            --surface: #1C1919;
-            --border: #2A2A2A;
-            --text: #E8E3E3;
-            --muted: #9A9090;
+            color-scheme: light;
+            --bg: #FFFFFF;
+            --surface: #F2F2F3;
+            --border: #ECECEC;
+            --text: #1A1A1A;
+            --muted: #6E6E73;
+            --dim: #9A9AA0;
             --accent: #D97757;
           }
           * { box-sizing: border-box; }
@@ -103,61 +104,65 @@ struct MarkdownWebView: NSViewRepresentable {
             padding: 0;
             background: var(--bg);
             color: var(--text);
-            font-family: 'Inter Variable', -apple-system, system-ui, sans-serif;
+            font-family: 'Inter Variable', 'Inter', -apple-system, system-ui, sans-serif;
             font-size: 13px;
-            line-height: 1.65;
+            line-height: 1.7;
             letter-spacing: 0.005em;
             -webkit-font-smoothing: antialiased;
           }
-          .doc { padding: 18px 20px 28px; }
+          .doc { padding: 24px 28px 36px; max-width: 820px; }
           h1, h2, h3, h4, h5, h6 {
             font-weight: 500;
-            margin: 1.4em 0 0.5em;
+            margin: 1.6em 0 0.6em;
             line-height: 1.3;
             color: var(--text);
+            letter-spacing: -0.005em;
           }
-          h1 { font-size: 20px; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
-          h2 { font-size: 17px; }
+          h1 { font-size: 22px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+          h2 { font-size: 18px; }
           h3 { font-size: 15px; }
           h4, h5, h6 { font-size: 13px; color: var(--muted); }
-          p { margin: 0.6em 0; }
+          p { margin: 0.7em 0; color: var(--text); }
           a { color: var(--accent); text-decoration: none; }
           a:hover { text-decoration: underline; }
-          ul, ol { margin: 0.5em 0; padding-left: 1.4em; }
-          li { margin: 0.2em 0; }
-          li::marker { color: var(--muted); }
+          strong { font-weight: 500; color: var(--text); }
+          ul, ol { margin: 0.6em 0; padding-left: 1.5em; }
+          li { margin: 0.25em 0; }
+          li::marker { color: var(--dim); }
           blockquote {
-            margin: 0.8em 0;
-            padding: 0.2em 0.9em;
+            margin: 1em 0;
+            padding: 0.3em 1em;
             border-left: 2px solid var(--border);
             color: var(--muted);
           }
-          hr { border: 0; border-top: 1px solid var(--border); margin: 1.2em 0; }
+          hr { border: 0; border-top: 1px solid var(--border); margin: 1.4em 0; }
           code {
             font-family: ui-monospace, 'SF Mono', Menlo, monospace;
             font-size: 12px;
             background: var(--surface);
             border: 1px solid var(--border);
-            padding: 1px 5px;
-            border-radius: 4px;
+            padding: 1px 6px;
+            border-radius: 6px;
+            color: var(--text);
           }
           pre {
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 6px;
-            padding: 10px 12px;
+            border-radius: 12px;
+            padding: 14px 16px;
             overflow-x: auto;
-            margin: 0.8em 0;
+            margin: 1em 0;
           }
-          pre code { background: transparent; border: none; padding: 0; border-radius: 0; font-size: 12px; line-height: 1.55; }
-          table { border-collapse: collapse; margin: 0.8em 0; font-size: 12px; }
-          th, td { border: 1px solid var(--border); padding: 5px 9px; text-align: left; }
-          th { background: var(--surface); font-weight: 500; }
-          img { max-width: 100%; height: auto; border-radius: 4px; }
+          pre code { background: transparent; border: none; padding: 0; border-radius: 0; font-size: 12px; line-height: 1.6; color: var(--text); }
+          table { border-collapse: collapse; margin: 1em 0; font-size: 13px; width: 100%; }
+          th, td { border: 1px solid var(--border); padding: 8px 12px; text-align: left; }
+          th { background: var(--surface); font-weight: 500; color: var(--text); }
+          tbody tr:nth-child(even) td { background: rgba(242, 242, 243, 0.5); }
+          img { max-width: 100%; height: auto; border-radius: 8px; }
           ::-webkit-scrollbar { width: 10px; height: 10px; }
           ::-webkit-scrollbar-track { background: transparent; }
-          ::-webkit-scrollbar-thumb { background: #2A2A2A; border-radius: 6px; border: 2px solid #171515; }
-          ::-webkit-scrollbar-thumb:hover { background: #3A3A3A; }
+          ::-webkit-scrollbar-thumb { background: #DDDDDD; border-radius: 6px; border: 2px solid #FFFFFF; }
+          ::-webkit-scrollbar-thumb:hover { background: #C0C0C0; }
         </style>
         <script src="marked.min.js"></script>
         </head>
